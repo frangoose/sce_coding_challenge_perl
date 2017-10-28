@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+
+my $inputfile;
+my @sentences;
+my $longest ="";
+
+open( my $inputfile,'input.txt') or die "Could not open $!";
+	my $counter = 0;
+	while (my $line = <$inputfile>) {
+		chomp($line);
+		$sentences[i] = $line;
+		#print("$counter: $sentences[i]\n"); #debug
+		if(length($sentences[i])>length($longest)){
+			$longest = $sentences[i];
+		}
+		$counter++;
+	}
+close $inputfile;
+
+print("$longest\n");
