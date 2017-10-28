@@ -2,7 +2,20 @@
 
 my $inputfile;
 my @sentences;
+my @palindromes;
 my $longest ="";
+my $longestP ="";
+
+sub isPalindrome {	
+	for($i = 0; i < length($sentences); $i++){
+		$first = substr($sentences[$counter], $i, 1);
+		$last = substr($sentences[$counter], $i - length($sentences[$counter]), 1);
+		if($first != $last){
+			last;
+		}
+	}
+	return 1;
+}
 
 open( my $inputfile,'input.txt') or die "Could not open $!";
 	my $counter = 0;
@@ -13,8 +26,18 @@ open( my $inputfile,'input.txt') or die "Could not open $!";
 		if(length($sentences[i])>length($longest)){
 			$longest = $sentences[i];
 		}
+		$first = substr($sentences[$counter], $i, 1);
+
+#		if(&isPalindrome){
+#			print("$sentences[$counter] Is Palindrome\n");
+#		}
+#		else{	
+#			print("Is Not Palindrome\n");
+#		}
 		$counter++;
 	}
+
 close $inputfile;
 
-print("$longest\n");
+#print("$longest\n");
+
