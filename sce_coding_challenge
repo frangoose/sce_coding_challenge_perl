@@ -2,11 +2,11 @@
 
 my $inputfile;
 my @sentences;
-my @palindromes;
 my $longest ="";
 my $longestP ="";
 my $pcount = 0;
 
+#subroutine that checks for palindrome conditions
 sub isPalindrome {
 	my ($str) = @_;
 
@@ -18,22 +18,24 @@ sub isPalindrome {
 	}
 }
 
+#start of main program
 
 open( my $inputfile,'input.txt') or die "Could not open $!";
 	my $counter = 0;
 	while (my $line = <$inputfile>) {
 		$temp = "";
-		chomp($line);
+		chomp($line); #removes newline char
 		$sentences[$counter] = $line;
 #		print("$counter: $sentences[$counter]\n"); #debug
 		if(length($sentences[$counter]) > length($longest)){
 			$longest = $sentences[$counter];
 		}
 
+		#format the string to prepare for palindrome condition checking
 		$temp =	$sentences[$counter];
-		$temp =~ s/ //g;
-		$temp =~ s/[[:punct:]]//g;
-		$temp = lc $temp;
+		$temp =~ s/ //g; #replaces spaces with nothing
+		$temp =~ s/[[:punct:]]//g; #replaces punctuation with nothing
+		$temp = lc $temp; #sets all chars to lowercase
 #		print("$temp"); #debug
 
 		if(isPalindrome($temp)){
