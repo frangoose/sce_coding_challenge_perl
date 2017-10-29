@@ -7,33 +7,65 @@ my $longest ="";
 my $longestP ="";
 
 sub isPalindrome {	
-	for($i = 0; i < length($sentences); $i++){
-		$first = substr($sentences[$counter], $i, 1);
-		$last = substr($sentences[$counter], $i - length($sentences[$counter]), 1);
-		if($first != $last){
-			last;
+	my ($str) = @_;
+	$str =~ s/[[:punct:]]//g;
+	$strlen = length($str);
+#	print($strlen);
+	for($i = 0; $i < $strlen; $i++){
+		$first = substr($str, $i, 1);
+		$last = substr($str, $strlen - $i, 1);
+		print($first);
+		print("$last\n");
+		if($first ne $last){
+			return 0;
 		}
 	}
 	return 1;
 }
 
+sub isPalindrome2 {
+	my ($str) = @_;
+
+	if($str eq reverse($str)){
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+
 open( my $inputfile,'input.txt') or die "Could not open $!";
 	my $counter = 0;
 	while (my $line = <$inputfile>) {
+		$temp = "";
 		chomp($line);
-		$sentences[i] = $line;
-		#print("$counter: $sentences[i]\n"); #debug
-		if(length($sentences[i])>length($longest)){
-			$longest = $sentences[i];
+		$sentences[$counter] = $line;
+#		print("$counter: $sentences[$counter]\n"); #debug
+		if(length($sentences[$counter])>length($longest)){
+			$longest = $sentences[$counter];
 		}
-		$first = substr($sentences[$counter], $i, 1);
 
-#		if(&isPalindrome){
+		$temp =	$sentences[$counter];
+		$temp =~ s/ //g;
+		$temp =~ s/[[:punct:]]//g;
+		$temp = lc $temp;
+#		print("$temp");
+
+
+#		$first = substr($sentences[$counter], 0, 1);
+
+#		if(isPalindrome($sentences[$counter])){
 #			print("$sentences[$counter] Is Palindrome\n");
 #		}
 #		else{	
 #			print("Is Not Palindrome\n");
 #		}
+
+		print(&isPalindrome2($temp));
+		print("\n");
+#		isPalindrome($sentences[$counter]);
+
 		$counter++;
 	}
 
