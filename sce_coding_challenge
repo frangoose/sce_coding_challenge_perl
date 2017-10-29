@@ -5,25 +5,9 @@ my @sentences;
 my @palindromes;
 my $longest ="";
 my $longestP ="";
+my $pcount = 0;
 
-sub isPalindrome {	
-	my ($str) = @_;
-	$str =~ s/[[:punct:]]//g;
-	$strlen = length($str);
-#	print($strlen);
-	for($i = 0; $i < $strlen; $i++){
-		$first = substr($str, $i, 1);
-		$last = substr($str, $strlen - $i, 1);
-		print($first);
-		print("$last\n");
-		if($first ne $last){
-			return 0;
-		}
-	}
-	return 1;
-}
-
-sub isPalindrome2 {
+sub isPalindrome {
 	my ($str) = @_;
 
 	if($str eq reverse($str)){
@@ -42,7 +26,7 @@ open( my $inputfile,'input.txt') or die "Could not open $!";
 		chomp($line);
 		$sentences[$counter] = $line;
 #		print("$counter: $sentences[$counter]\n"); #debug
-		if(length($sentences[$counter])>length($longest)){
+		if(length($sentences[$counter]) > length($longest)){
 			$longest = $sentences[$counter];
 		}
 
@@ -50,26 +34,20 @@ open( my $inputfile,'input.txt') or die "Could not open $!";
 		$temp =~ s/ //g;
 		$temp =~ s/[[:punct:]]//g;
 		$temp = lc $temp;
-#		print("$temp");
+#		print("$temp"); #debug
 
-
-#		$first = substr($sentences[$counter], 0, 1);
-
-#		if(isPalindrome($sentences[$counter])){
-#			print("$sentences[$counter] Is Palindrome\n");
-#		}
-#		else{	
-#			print("Is Not Palindrome\n");
-#		}
-
-		print(&isPalindrome2($temp));
-		print("\n");
-#		isPalindrome($sentences[$counter]);
+		if(isPalindrome($temp)){
+			if(length($temp) > length($longestP)){
+				$longestP = $sentences[$counter];
+			}
+			$pcount++;
+		}
 
 		$counter++;
 	}
 
 close $inputfile;
 
-#print("$longest\n");
-
+print("Longest sentence: \"$longest\"\n\n");
+print("Number of palindromes: $pcount\n\n");
+print("Longest Palindrome: \"$longestP\"\n\n");
